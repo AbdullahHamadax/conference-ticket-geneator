@@ -1,57 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Conference ticket generator</title>
+    <style>
+      body {
+        font-family: "Inconsolata", sans-serif;
+        background-image: url("assets/images/pattern-lines.svg"),
+          url("assets/images/background-mobile.png");
+        background-size: cover, cover;
+        background-position: center, center;
+        background-repeat: no-repeat, no-repeat;
+      }
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+      @media only screen and (min-width: 751px) {
+        body {
+          background-image: url("assets/images/pattern-lines.svg"),
+            url("assets/images/background-tablet.png");
+        }
+      }
 
-  <!-- Form starts -->
+      @media only screen and (min-width: 1024px) {
+        body {
+          background-image: url("assets/images/pattern-lines.svg"),
+            url("assets/images/background-desktop.png");
+        }
+      }
+    </style>
 
-  Your Journey to Coding Conf 2025 Starts Here!
+    <title>Conference ticket generator</title>
+  </head>
+  <body class="min-h-screen px-5 text-white flex flex-col">
+    <header class="flex flex-col">
+      <img
+        src="assets/images/logo-full.svg"
+        alt="Coding Conf logo"
+        class="m-auto mt-9"
+      />
+      <div class="mt-9 flex flex-col gap-3">
+        <h1 class="text-white text-center font-bold text-3xl">
+          Your journey to Coding Conf 2025 Starts Here!
+        </h1>
+        <p class="text-[#d2d1d6] text-center text-lg">
+          Secure your spot at next year's biggest coding conference.
+        </p>
+      </div>
+    </header>
+    <section class="mt-9">
+      <form class="mb-5">
+        <div class="max-w-xl w-full m-auto flex flex-col gap-y-4">
+          <label for="uploadAvatar" class="text-xl text-[#d2d1d6]"
+            >Upload Avatar</label
+          >
+          <label
+            for="dropzone-file"
+            class="flex flex-col items-center justify-center border-2 border-[#8784a4] border-dashed rounded-xl cursor-pointer bg-[#8784a4] bg-opacity-20 hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+          >
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <div
+                class="border mb-7 rounded-2xl px-[0.80rem] py-3 bg-[#4b486a] border-[#8784a4] border-opacity-50 bg-opacity-60"
+              >
+                <img
+                  src="assets/images/icon-upload.svg"
+                  class="size-11 animate-bounce transition duration-1000"
+                  alt="upload icon"
+                />
+              </div>
+              <p class="mb-2 text-2xl text-[#d2d1d6]">
+                Drag and drop or click to upload
+              </p>
+            </div>
 
-  Secure your spot at next year's biggest coding conference.
-
-  Upload Avatar
-  Drag and drop or click to upload
-  Upload your photo (JPG or PNG, max size: 500KB).
-
-  Full Name
-
-  Email Address
-  example@email.com
-
-  GitHub Username
-  @yourusername
-
-  Generate My Ticket
-
-  <!-- Form ends -->
-
-  <!-- Generated tickets starts -->
-
-  Congrats, <!-- Full Name -->! Your ticket is ready.
-
-  We've emailed your ticket to <!-- Email Address --> and will send updates in the run up to the event.
-
-  Coding Conf
-  Jan 31, 2025 / Austin, TX
-
-  <!-- Generated tickets ends -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+            <input id="dropzone-file" type="file" class="hidden" />
+          </label>
+          <p class="mt-2 text-lg text-[#d2d1d6] flex gap-3">
+            <img src="assets/images/icon-info.svg" alt="info icon" />
+            Upload your photo (JPG or PNG, max size: 500KB).
+          </p>
+          <label for="fullName" class="text-xl text-[#d2d1d6]">Full Name</label>
+          <input
+            type="text"
+            placeholder="John Doe"
+            class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+          />
+          <label for="email" class="text-xl text-[#d2d1d6]"
+            >Email Address</label
+          >
+          <input
+            type="email"
+            placeholder="example@email.com"
+            class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+          />
+          <label for="githubUsername" class="text-xl text-[#d2d1d6]"
+            >Github Username</label
+          >
+          <input
+            type="text"
+            placeholder="@yourusername"
+            class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+          />
+          <button
+            class="text-black border-b-transparent bg-[#e16151] rounded-xl p-5 font-bold text-xl mt-3 hover:border-b-[7px] transition-all hover:border-[#f57261] outline-none focus:outline-white outline-1 outline-offset-[3px]"
+          >
+            Generate My Ticket
+          </button>
+        </div>
+      </form>
+    </section>
+  </body>
 </html>
+l>

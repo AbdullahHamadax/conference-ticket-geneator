@@ -12,10 +12,10 @@ The designs were created to the following widths:
 ## Colors
 
 - Neutral 0: hsl(0, 0%, 100%)
-- Neutral 300: hsl(252, 6%, 83%)
-- Neutral 500: hsl(245, 15%, 58%)
-- Neutral 700: hsl(245, 19%, 35%)
-- Neutral 900: hsl(248, 70%, 10%)
+- Neutral 300: hsl(252, 6%, 83%) = #d2d1d6
+- Neutral 500: hsl(245, 15%, 58%) = #8784a4
+- Neutral 700: hsl(245, 19%, 35%) = #4b486a
+- Neutral 900: hsl(248, 70%, 10%) = #0c082b
 
 - Orange 500: hsl(7, 88%, 67%)
 - Orange 700: hsl(7, 71%, 60%)
@@ -26,7 +26,7 @@ The designs were created to the following widths:
 
 ### Body Copy
 
-- Font size (labels): 20px 
+- Font size (labels): 20px
 
 ### Font
 
