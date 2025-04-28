@@ -44,83 +44,122 @@
 
     <title>Conference ticket generator</title>
   </head>
-  <body class="min-h-screen px-5 text-white flex flex-col">
-    <header class="flex flex-col">
+  <body class="min-h-screen px-5 text-white">
+    <main>
       <img
         src="assets/images/logo-full.svg"
         alt="Coding Conf logo"
         class="m-auto mt-9"
       />
-      <div class="mt-9 flex flex-col gap-3">
-        <h1 class="text-white text-center font-bold text-3xl">
-          Your journey to Coding Conf 2025 Starts Here!
+      <div class="text-center mt-9 flex flex-col gap-y-5">
+        <h1 class="text-center font-bold text-3xl">
+          Congrats,
+          <span
+            class="bg-gradient-to-r from-[#f57261] to-white bg-clip-text text-transparent"
+            >John Doe!</span
+          >
+          Your ticket is ready.
         </h1>
         <p class="text-[#d2d1d6] text-center text-lg">
-          Secure your spot at next year's biggest coding conference.
+          We've emailed your ticket to
+          <span class="text-[#f57261]">johndoe@email.com</span> and will send
+          updates in the run up to the event.
         </p>
-      </div>
-    </header>
-    <section class="mt-9">
-      <form class="mb-5">
-        <div class="max-w-xl w-full m-auto flex flex-col gap-y-4">
-          <label for="uploadAvatar" class="text-xl text-[#d2d1d6]"
-            >Upload Avatar</label
-          >
-          <label
-            for="dropzone-file"
-            class="flex flex-col items-center justify-center border-2 border-[#8784a4] border-dashed rounded-xl cursor-pointer bg-[#8784a4] bg-opacity-20 hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
-          >
-            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-              <div
-                class="border mb-7 rounded-2xl px-[0.80rem] py-3 bg-[#4b486a] border-[#8784a4] border-opacity-50 bg-opacity-60"
-              >
-                <img
-                  src="assets/images/icon-upload.svg"
-                  class="size-11 animate-bounce transition duration-1000"
-                  alt="upload icon"
-                />
-              </div>
-              <p class="mb-2 text-2xl text-[#d2d1d6]">
-                Drag and drop or click to upload
-              </p>
-            </div>
-
-            <input id="dropzone-file" type="file" class="hidden" />
-          </label>
-          <p class="mt-2 text-lg text-[#d2d1d6] flex gap-3">
-            <img src="assets/images/icon-info.svg" alt="info icon" />
-            Upload your photo (JPG or PNG, max size: 500KB).
-          </p>
-          <label for="fullName" class="text-xl text-[#d2d1d6]">Full Name</label>
-          <input
-            type="text"
-            placeholder="John Doe"
-            class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+        <div class="relative m-auto">
+          <img
+            src="assets/images/pattern-ticket.svg"
+            alt="ticket image"
+            class="w-fit relative"
           />
-          <label for="email" class="text-xl text-[#d2d1d6]"
-            >Email Address</label
-          >
-          <input
-            type="email"
-            placeholder="example@email.com"
-            class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+          <img
+            src="assets/images/logo-full.svg"
+            class="p-5 w-fit absolute top-0 left-0"
+            alt="Coding Conf Logo"
           />
-          <label for="githubUsername" class="text-xl text-[#d2d1d6]"
-            >Github Username</label
-          >
-          <input
-            type="text"
-            placeholder="@yourusername"
-            class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+          <img
+            src="assets/images/image-avatar.jpg"
+            class="rounded-md size-12 absolute bottom-3 left-3"
+            alt="User avatar"
           />
-          <button
-            class="text-black border-b-transparent bg-[#e16151] rounded-xl p-5 font-bold text-xl mt-3 hover:border-b-[7px] transition-all hover:border-[#f57261] outline-none focus:outline-white outline-1 outline-offset-[3px]"
-          >
-            Generate My Ticket
-          </button>
         </div>
-      </form>
-    </section>
+      </div>
+      <div class="hidden">
+        <header class="flex flex-col">
+          <div class="mt-9 flex flex-col gap-3">
+            <h1 class="text-white text-center font-bold text-3xl">
+              Your journey to Coding Conf 2025 Starts Here!
+            </h1>
+            <p class="text-[#d2d1d6] text-center text-lg">
+              Secure your spot at next year's biggest coding conference.
+            </p>
+          </div>
+        </header>
+        <section class="mt-9">
+          <form class="mb-5">
+            <div class="max-w-xl w-full m-auto flex flex-col gap-y-4">
+              <label for="uploadAvatar" class="text-xl text-[#d2d1d6]"
+                >Upload Avatar</label
+              >
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center border-2 border-[#8784a4] border-dashed rounded-xl cursor-pointer bg-[#8784a4] bg-opacity-20 hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+              >
+                <div
+                  class="flex flex-col items-center justify-center pt-5 pb-6"
+                >
+                  <div
+                    class="border mb-7 rounded-2xl px-[0.80rem] py-3 bg-[#4b486a] border-[#8784a4] border-opacity-50 bg-opacity-60"
+                  >
+                    <img
+                      src="assets/images/icon-upload.svg"
+                      class="size-11 animate-bounce transition duration-1000"
+                      alt="upload icon"
+                    />
+                  </div>
+                  <p class="mb-2 text-2xl text-[#d2d1d6] text-center">
+                    Drag and drop or click to upload
+                  </p>
+                </div>
+
+                <input id="dropzone-file" type="file" class="hidden" />
+              </label>
+              <p class="mt-2 text-lg text-[#d2d1d6] flex gap-3">
+                <img src="assets/images/icon-info.svg" alt="info icon" />
+                Upload your photo (JPG or PNG, max size: 500KB).
+              </p>
+              <label for="fullName" class="text-xl text-[#d2d1d6]"
+                >Full Name</label
+              >
+              <input
+                type="text"
+                placeholder="John Doe"
+                class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+              />
+              <label for="email" class="text-xl text-[#d2d1d6]"
+                >Email Address</label
+              >
+              <input
+                type="email"
+                placeholder="example@email.com"
+                class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+              />
+              <label for="githubUsername" class="text-xl text-[#d2d1d6]"
+                >Github Username</label
+              >
+              <input
+                type="text"
+                placeholder="@yourusername"
+                class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
+              />
+              <button
+                class="text-black border-b-transparent bg-[#e16151] rounded-xl p-5 font-bold text-xl mt-3 hover:border-b-[7px] transition-all hover:border-[#f57261] outline-none focus:outline-white outline-1 outline-offset-[3px]"
+              >
+                Generate My Ticket
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
   </body>
 </html>
-l>
