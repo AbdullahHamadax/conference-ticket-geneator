@@ -51,8 +51,8 @@
         alt="Coding Conf logo"
         class="m-auto mt-9"
       />
-      <div class="text-center mt-9 flex flex-col gap-y-5">
-        <h1 class="text-center font-bold text-3xl">
+      <!-- <div class="flex flex-col text-center mt-9 gap-y-5">
+        <h1 class="text-3xl font-bold text-center">
           Congrats,
           <span
             class="bg-gradient-to-r from-[#f57261] to-white bg-clip-text text-transparent"
@@ -65,28 +65,37 @@
           <span class="text-[#f57261]">johndoe@email.com</span> and will send
           updates in the run up to the event.
         </p>
-        <div class="relative m-auto">
-          <img
-            src="assets/images/pattern-ticket.svg"
-            alt="ticket image"
-            class="w-fit relative"
-          />
+        <div class="relative max-w-sm mx-auto mt-20 transition opacity-100">
+          <img src="assets/images/pattern-ticket.svg" alt="ticket image" />
           <img
             src="assets/images/logo-full.svg"
-            class="p-5 w-fit absolute top-0 left-0"
             alt="Coding Conf Logo"
+            class="absolute top-5 left-5"
           />
+
           <img
             src="assets/images/image-avatar.jpg"
-            class="rounded-md size-12 absolute bottom-3 left-3"
             alt="User avatar"
+            class="absolute rounded-md w-14 bottom-3 left-5"
           />
+
+          <div class="absolute text-white left-20 bottom-4">
+            <p class="text-xl font-medium">Jonatan Kristof</p>
+            <div class="flex items-center gap-1">
+              <img src="assets/images/icon-github.svg" alt="github icon" />
+              <p class="text-xs opacity-70">@jonatankristof0101</p>
+            </div>
+          </div>
+
+          <p class="absolute right-0 text-2xl rotate-90 bottom-[70px]">
+            #012344
+          </p>
         </div>
-      </div>
-      <div class="hidden">
+      </div> -->
+      <div class="">
         <header class="flex flex-col">
-          <div class="mt-9 flex flex-col gap-3">
-            <h1 class="text-white text-center font-bold text-3xl">
+          <div class="flex flex-col gap-3 mt-9">
+            <h1 class="text-3xl font-bold text-center text-white">
               Your journey to Coding Conf 2025 Starts Here!
             </h1>
             <p class="text-[#d2d1d6] text-center text-lg">
@@ -96,7 +105,7 @@
         </header>
         <section class="mt-9">
           <form class="mb-5">
-            <div class="max-w-xl w-full m-auto flex flex-col gap-y-4">
+            <div class="flex flex-col w-full max-w-xl m-auto gap-y-4">
               <label for="uploadAvatar" class="text-xl text-[#d2d1d6]"
                 >Upload Avatar</label
               >
@@ -112,7 +121,7 @@
                   >
                     <img
                       src="assets/images/icon-upload.svg"
-                      class="size-11 animate-bounce transition duration-1000"
+                      class="transition duration-1000 size-11 animate-bounce"
                       alt="upload icon"
                     />
                   </div>
@@ -121,7 +130,7 @@
                   </p>
                 </div>
 
-                <input id="dropzone-file" type="file" class="hidden" />
+                <input id="uploadAvatar" type="file" class="hidden" />
               </label>
               <p class="mt-2 text-lg text-[#d2d1d6] flex gap-3">
                 <img src="assets/images/icon-info.svg" alt="info icon" />
@@ -133,6 +142,7 @@
               <input
                 type="text"
                 placeholder="John Doe"
+                id="fullName"
                 class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
               />
               <label for="email" class="text-xl text-[#d2d1d6]"
@@ -140,6 +150,7 @@
               >
               <input
                 type="email"
+                id="email"
                 placeholder="example@email.com"
                 class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
               />
@@ -148,6 +159,7 @@
               >
               <input
                 type="text"
+                id="githubUsername"
                 placeholder="@yourusername"
                 class="p-4 text-xl border-[1.5px] rounded-xl py-4 cursor-pointer bg-[#4b486a] bg-opacity-30 border-[#8784a4] hover:bg-[#8784a4] hover:bg-opacity-50 outline-none focus:outline-[#8784a4] outline-2 outline-offset-[3px]"
               />
@@ -161,5 +173,6 @@
         </section>
       </div>
     </main>
+    <script src="index.js"></script>
   </body>
 </html>
