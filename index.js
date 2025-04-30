@@ -49,6 +49,10 @@ function handleFiles(files) {
   if (!files || files.length === 0) return;
   const file = files[0];
 
+  const dataTransfer = new DataTransfer();
+  dataTransfer.items.add(file);
+  fileInput.files = dataTransfer.files;
+
   if (!["image/jpeg", "image/png"].includes(file.type)) {
     errorMsg(photoFeedback, "Please upload your image in PNG or JPEG format.");
     errorOutline(dropzone);
@@ -109,8 +113,8 @@ function handleFormSubmit(e) {
 
   let formIsValid = true;
 
-  const previewImg = dropzone.querySelector("img");
-  if (!previewImg || !previewImg.src) {
+  const validImage = fileInput.files && fileInput.files.length > 0;
+  if (!validImage) {
     errorMsg(photoFeedback, "Please upload an image.");
     errorOutline(dropzone);
     formIsValid = false;
