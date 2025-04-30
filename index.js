@@ -1,12 +1,31 @@
 const form = document.querySelector("form");
+const dropzone = document.getElementById("dropzone");
+const fileInput = document.getElementById("dropzone-file");
+const emailInput = document.getElementById("email-input");
+const nameInput = document.getElementById("name-input");
+const githubUsernameInput = document.getElementById("github-username-input");
+
+const photoFeedback = document.getElementById("photo-feedback");
+const emailFeedback = document.getElementById("email-feedback");
+const fullNameFeedback = document.getElementById("full-name-feedback");
+const githubUsernameFeedback = document.getElementById(
+  "github-username-feedback"
+);
+const userForm = document.getElementById("user-form");
+const userAvatar = document.getElementById("user-avatar");
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
+const githubUsernameRegex = /^@[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
+
+const maxImageSize = 500 * 1024;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const userAvatar = document.getElementById("user-avatar");
+  setupFileUpload();
+  form.addEventListener("submit", handleFormSubmit);
+});
 
-  const dropzone = document.getElementById("dropzone");
-  const fileInput = document.getElementById("dropzone-file");
-  const maxImageSize = 500 * 1024;
-
+function setupFileUpload() {
   fileInput.addEventListener("change", () => handleFiles(fileInput.files));
 
   dropzone.addEventListener("dragover", (e) => {
@@ -24,98 +43,144 @@ document.addEventListener("DOMContentLoaded", () => {
     dropzone.classList.remove("bg-opacity-50");
     handleFiles(e.dataTransfer.files);
   });
+}
 
-  function handleFiles(files) {
-    const photoFeedback = document.getElementById("photo-feedback");
-    if (!files || files.length === 0) return;
-    const file = files[0];
+function handleFiles(files) {
+  if (!files || files.length === 0) return;
+  const file = files[0];
 
-    if (!["image/jpeg", "image/png"].includes(file.type)) {
-      photoFeedback.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1 text-[#e16151]" fill="none" viewBox="0 0 16 16" stroke="currentColor">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"/>
-      <path fill="currentColor" d="M8.004 10.462V7.596ZM8 5.57v-.042Z"/>
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8.004 10.462V7.596M8 5.569v-.042"/>
-    </svg>
-    Please upload your image in PNG or JPEG format.
-  `;
-      photoFeedback.classList.replace("text-[#d2d1d6]", "text-[#e16151]");
-      photoFeedback.classList.add("animate-pulse", "transition");
-      return;
-    }
-
-    if (file.size > maxImageSize) {
-      photoFeedback.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1 text-[#e16151]" fill="none" viewBox="0 0 16 16" stroke="currentColor">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"/>
-      <path fill="currentColor" d="M8.004 10.462V7.596ZM8 5.57v-.042Z"/>
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M8.004 10.462V7.596M8 5.569v-.042"/>
-    </svg>
-    File too large. Please upload a photo under 500KB.
-  `;
-      photoFeedback.classList.replace("text-[#d2d1d6]", "text-[#e16151]");
-      photoFeedback.classList.add("animate-pulse", "transition");
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const dropzoneContent = dropzone.querySelector("div");
-      dropzone.removeChild(dropzoneContent);
-
-      const previewContainer = document.createElement("div");
-      previewContainer.className =
-        "flex flex-col items-center justify-center w-full py-8";
-
-      const preview = document.createElement("img");
-      preview.className = "object-cover mb-4 rounded-md size-32";
-      preview.src = e.target.result;
-      userAvatar.src = e.target.result; // Replacing the ticket image placeholder with the image the user uploads
-
-      const fileLabel = document.createElement("p");
-      fileLabel.className = "text-xl text-[#d2d1d6]";
-      fileLabel.textContent = "Image uploaded successfully!";
-
-      previewContainer.appendChild(preview);
-      previewContainer.appendChild(fileLabel);
-
-      dropzone.appendChild(previewContainer);
-    };
-    reader.readAsDataURL(file);
+  if (!["image/jpeg", "image/png"].includes(file.type)) {
+    errorMsg(photoFeedback, "Please upload your image in PNG or JPEG format.");
+    errorOutline(dropzone);
+    return;
   }
-});
 
-/* Email and Full name regular expressions */
+  if (file.size > maxImageSize) {
+    errorMsg(
+      photoFeedback,
+      "File too large. Please upload a photo under 500KB."
+    );
+    errorOutline(dropzone);
+    return;
+  }
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
+  hideError(photoFeedback, dropzone);
+  displayImagePreview(file);
+}
 
-form.addEventListener("submit", (e) => {
+function displayImagePreview(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const dropzoneContent = dropzone.querySelector("div");
+    if (dropzoneContent) dropzone.removeChild(dropzoneContent);
+
+    const previewContainer = document.createElement("div");
+    previewContainer.className =
+      "flex flex-col items-center justify-center w-full py-8";
+
+    const preview = document.createElement("img");
+    preview.className = "object-cover mb-4 rounded-md size-32";
+    preview.src = e.target.result;
+    userAvatar.src = e.target.result;
+
+    const fileLabel = document.createElement("p");
+    fileLabel.className = "text-xl text-[#d2d1d6]";
+    fileLabel.textContent = "Image uploaded successfully!";
+
+    previewContainer.appendChild(preview);
+    previewContainer.appendChild(fileLabel);
+    dropzone.appendChild(previewContainer);
+  };
+
+  reader.onerror = () => {
+    errorMsg(photoFeedback, "Error reading file. Please try again.");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function handleFormSubmit(e) {
   e.preventDefault();
+
   const formData = new FormData(e.target);
   const fullName = formData.get("fullName");
-  const githubUsername = formData.get("githubUsername");
   const email = formData.get("email");
-  const emailFeedback = document.getElementById("email-feedback");
-  const fullNameFeedback = document.getElementById("full-name-feedback");
-  const userForm = document.getElementById("user-form");
+  const githubUsername = formData.get("githubUsername");
 
-  /* Here I am just validating the data with if conditions */
+  let formIsValid = true;
 
-  if (!emailRegex.test(email)) {
-    emailFeedback.classList.remove("hidden");
-    return;
+  const validImage = fileInput.files && fileInput.files.length > 0;
+  if (!validImage) {
+    errorMsg(photoFeedback, "Please upload an image.");
+    errorOutline(dropzone);
+    formIsValid = false;
   } else {
-    emailFeedback.classList.add("hidden");
+    hideError(photoFeedback, dropzone);
   }
 
   if (!nameRegex.test(fullName)) {
-    fullNameFeedback.classList.remove("hidden");
-    return;
+    errorMsg(
+      fullNameFeedback,
+      "Please enter your name with each part starting with a capital letter."
+    );
+    errorOutline(nameInput);
+    formIsValid = false;
   } else {
-    fullNameFeedback.classList.add("hidden");
+    hideError(fullNameFeedback, nameInput);
   }
 
+  if (!emailRegex.test(email)) {
+    errorMsg(emailFeedback, "Please enter a valid email address.");
+    errorOutline(emailInput);
+    formIsValid = false;
+  } else {
+    hideError(emailFeedback, emailInput);
+  }
+
+  if (!githubUsernameRegex.test(githubUsername)) {
+    errorMsg(
+      githubUsernameFeedback,
+      "Please enter a valid GitHub username. It must only contain letters, numbers, and hyphens, and cannot start or end with a hyphen."
+    );
+    errorOutline(githubUsernameInput);
+    formIsValid = false;
+  } else {
+    hideError(githubUsernameFeedback, githubUsernameInput);
+  }
+
+  if (formIsValid) {
+    displayTicket(fullName, email, githubUsername);
+  }
+}
+
+function errorOutline(element) {
+  element.classList.add("ring", "ring-[#e16151]");
+}
+
+function clearErrorOutline(element) {
+  element.classList.remove("ring", "ring-[#e16151]");
+}
+
+function hideError(feedbackElement, inputElement) {
+  feedbackElement.classList.add("hidden");
+  feedbackElement.classList.remove(
+    "animate-pulse",
+    "transition",
+    "text-[#e16151]"
+  );
+  feedbackElement.classList.add("text-[#d2d1d6]");
+  clearErrorOutline(inputElement);
+}
+
+function errorMsg(element, message) {
+  const paragraph = element.querySelector("p");
+  paragraph.textContent = message;
+
+  element.classList.remove("hidden");
+  element.classList.add("animate-pulse", "text-[#e16151]");
+}
+
+function displayTicket(fullName, email, githubUsername) {
   const ticket = document.getElementById("ticket");
   const submittedEmail = document.getElementById("submitted-email");
   const submittedName = document.getElementById("submitted-name");
@@ -123,14 +188,25 @@ form.addEventListener("submit", (e) => {
   const ticketGithubName = document.getElementById("ticket-github-username");
   const ticketId = document.getElementById("ticket-id");
 
+  submittedEmail.textContent = email;
+  submittedName.textContent = fullName;
+  ticketName.textContent = fullName;
+  ticketGithubName.textContent = githubUsername;
+  ticketId.textContent = `#${Math.floor(Math.random() * 10000) + 10000}`;
+
   ticket.classList.remove("hidden");
   userForm.classList.add("hidden");
 
-  submittedEmail.textContent = email;
-  submittedName.textContent = fullName;
+  animateTicket();
+}
 
-  ticketName.textContent = fullName;
-  ticketGithubName.textContent = githubUsername;
+function animateTicket() {
+  const ticket = document.getElementById("ticket-card");
+  ticket.style.display = "flex";
 
-  ticketId.textContent = `#` + Math.floor(Math.random() * 1000) + 100;
-});
+  anime({
+    targets: "#ticket-card",
+    translateY: 50,
+    opacity: [0, 1],
+  });
+}
