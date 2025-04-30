@@ -15,7 +15,7 @@ const userForm = document.getElementById("user-form");
 const userAvatar = document.getElementById("user-avatar");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const nameRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
+const nameRegex = /^[A-Z][a-zA-Z.'\\-]*(?: [A-Z][a-zA-Z.'\\-]*)*$/;
 const githubUsernameRegex = /^@[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
 const maxImageSize = 500 * 1024;
