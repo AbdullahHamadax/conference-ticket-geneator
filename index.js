@@ -41,7 +41,9 @@ function setupFileUpload() {
   dropzone.addEventListener("drop", (e) => {
     e.preventDefault();
     dropzone.classList.remove("bg-opacity-50");
-    handleFiles(e.dataTransfer.files);
+    if (e.dataTransfer.files.length) {
+      handleFiles(e.dataTransfer.files);
+    }
   });
 }
 
@@ -113,9 +115,12 @@ function handleFormSubmit(e) {
 
   let formIsValid = true;
 
-  const validImage = fileInput.files && fileInput.files.length > 0;
-  if (!validImage) {
+  if (!fileInput.files || fileInput.files.length === 0) {
     errorMsg(photoFeedback, "Please upload an image.");
+    errorOutline(dropzone);
+    formIsValid = false;
+  } else if (!["image/jpeg", "image/png"].includes(fileInput.files[0].type)) {
+    errorMsg(photoFeedback, "Please upload your image in PNG or JPEG format.");
     errorOutline(dropzone);
     formIsValid = false;
   } else {
