@@ -109,8 +109,8 @@ function handleFormSubmit(e) {
 
   let formIsValid = true;
 
-  const validImage = fileInput.files && fileInput.files.length > 0;
-  if (!validImage) {
+  const previewImg = dropzone.querySelector("img");
+  if (!previewImg || !previewImg.src) {
     errorMsg(photoFeedback, "Please upload an image.");
     errorOutline(dropzone);
     formIsValid = false;
