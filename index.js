@@ -149,7 +149,7 @@ function handleFormSubmit(e) {
   if (!githubUsernameRegex.test(githubUsername)) {
     errorMsg(
       githubUsernameFeedback,
-      "Please enter a valid GitHub username. It must only contain letters, numbers, and hyphens, and cannot start or end with a hyphen."
+      "Please enter a valid GitHub username. It must start with @ and only contain letters, numbers, and hyphens, and cannot start or end with a hyphen."
     );
     errorOutline(githubUsernameInput);
     formIsValid = false;
